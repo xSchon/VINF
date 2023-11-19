@@ -1,3 +1,4 @@
+from datetime import datetime
 import pandas as pd
 import json
 import csv
@@ -37,12 +38,12 @@ def process_players(players):
         player['Age'] = age
         player['Role'] = role
         
-    players['player_id'] = [i for i in range(len(players))]
+    players['PlayerId'] = [i for i in range(len(players))]
     return players
     
     
 def process_teams(players):
-    teams_df = pd.DataFrame(columns=['player_id', 'team', 'since', 'till'])
+    teams_df = pd.DataFrame(columns=['PlayerId', 'Team', 'Since', 'Till'])
     team_name_pattern = r'Team (.+?) -'
     since_pattern = r'Since: (\d{4}-\d{2}-\d{2})'
     till_pattern = r'Till: (\w+)'
@@ -71,8 +72,7 @@ def process_teams(players):
 
             # Print the information
             if team_name is not None:
-                teams_df = pd.concat([teams_df, pd.DataFrame({'player_id':[player.id], 'team' : [team_name], 'since': [since_date], 'till': [till_date]})], ignore_index=True)
-                new_row = {'player_id': '1', 'team': 'Team A', 'since': '2022-01-01', 'till': '2022-12-31'}
+                teams_df = pd.concat([teams_df, pd.DataFrame({'PlayerId':[player.PlayerId], 'Team' : [team_name], 'Since': [since_date], 'Till': [till_date]})], ignore_index=True)
                 
     return teams_df
     
@@ -82,14 +82,14 @@ def main():
     teams = process_teams(players)
 
     with open(TEAMS_LIST, 'w') as f: 
-        for t in list(teams_df.team.unique()):
+        for t in list(teams.Team.unique()):
             f.write(str(t)+"\n")
         
     with open(COUNTRIES_LIST, 'w') as f:
         for c in list(players.BirthCountry.unique()):
             f.write(str(c)+"\n")
         
-    merged_df = pd.merge(teams_df, players, on='player_id', how='outer')
+    merged_df = pd.merge(teams, players, on='PlayerId', how='outer')
     
     teams.to_csv(NEW_TEAMS, sep='\t', index=False)
     players.to_csv(NEW_PLAYERS, sep='\t', index=False)
