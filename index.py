@@ -71,4 +71,4 @@ def search_query(analyzer, index, to_check='Korea', where_check = "PlayerCard", 
 
 
 ana, idx = create_index()
-search_query(ana, idx, 'EU')
+search_query(ana, idx, 'Top Laner')
