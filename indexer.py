@@ -1,4 +1,3 @@
-
 import csv
 import os
 import lucene
@@ -15,7 +14,8 @@ INDEX_DIR = f"{FILE_PATH}/players_index"
 CSV_FILE = f"{FILE_PATH}/data/final_data.csv"
 lucene.initVM()
 
-def create_index(index_dir: str, csv_file_path : str) -> None:
+
+def create_index(index_dir: str, csv_file_path: str) -> None:
     """
     Function for index creation for all of the rows in the csv file.
     args:
@@ -27,8 +27,8 @@ def create_index(index_dir: str, csv_file_path : str) -> None:
     config = IndexWriterConfig(analyzer)
     writer = IndexWriter(FSDirectory.open(Paths.get(index_dir)), config)
 
-    with open(csv_file_path, 'r') as csvfile:
-        csv_reader = csv.DictReader(csvfile, delimiter='\t')
+    with open(csv_file_path, "r") as csvfile:
+        csv_reader = csv.DictReader(csvfile, delimiter="\t")
 
         for row in csv_reader:
             document = Document()
