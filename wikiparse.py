@@ -1,9 +1,10 @@
 import json
-import xml.etree.ElementTree as ET
 import os
-import re
 
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
+from pyspark.sql import SparkSession
+
 
 
 spark = SparkSession.builder \
@@ -55,7 +56,7 @@ def main():
     	            if element == title:
     	                teams_wiki[title] = content
                         break
-    	    
+        
         for element in countries_list:
             if element == title:
                 countries_wiki[title] = content
