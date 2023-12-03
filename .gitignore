@@ -1,2 +1,3 @@
 /wiki/*
 *.ipynb_checkpoints
+/players_index/*
