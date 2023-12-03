@@ -5,7 +5,7 @@ from searcher import Searcher
 sg.theme('DarkBlue13')   
 
 def find_fields_to_search(values, search_names, filter_amount) -> list:
-    csv_columns = ['Team', 'PlayerName', 'HistoryText', 'PlayerCard', 'TournamentResults', 'ChampionStats', 'BirthCountry', 'Age', 'Role', 'Sports', 'CountryInfo', 'InfoBox']
+    csv_columns = ['Team', 'PlayerName', 'HistoryText', 'PlayerCard', 'TournamentResults', 'ChampionsStats', 'BirthCountry', 'Age', 'Role', 'Sports', 'CountryInfo', 'InfoBox']
     search_fields = []
     search_values = []
     for i in range(filter_amount):
